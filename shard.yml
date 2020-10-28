@@ -1,0 +1,14 @@
+name: v6
+version: 0.1.0
+
+authors:
+  - Giorgi Kavrelishvili <giorgi.kavrelishvili@pm.me>
+
+dependencies:
+  gobject:
+    github: jhass/crystal-gobject
+    sversion: ~> 0.9.1
+
+crystal: 0.35.1
+
+license: MIT
