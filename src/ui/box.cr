@@ -13,8 +13,9 @@ module V6
       property can_focus : Bool?
       property double_buffered : Bool?
       property events : Gdk::EventMask?
-      property expand : Bool?
+      property expand : Bool = false
       property focus_on_click : Bool?
+      property fill : Bool = false
       property halign : Gtk::Align?
       property has_default : Bool?
       property has_focus : Bool?
@@ -35,7 +36,7 @@ module V6
       property no_show_all : Bool?
       property opacity : Float64?
       property orientation : Gtk::Orientation?
-      property parent : Gtk::Container?
+      property padding : Int32 = 0
       property receives_default : Bool?
       property resize_mode : Gtk::ResizeMode?
       property sensitive : Bool?
@@ -55,17 +56,62 @@ module V6
       def initialize(@child : Component) : Void
       end
 
-      def initialize(@child : Component, app_paintable : Bool?, baseline_position : Gtk::BaselinePosition?, border_width : UInt32?, can_default : Bool?, can_focus : Bool?, double_buffered : Bool?, events : Gdk::EventMask?, expand : Bool?, focus_on_click : Bool?, halign : Gtk::Align?, has_default : Bool?, has_focus : Bool?, has_tooltip : Bool?, height_request : Int32?, hexpand : Bool?, hexpand_set : Bool?, homogeneous : Bool?, is_focus : Bool?, margin : Int32?, margin_bottom : Int32?, margin_end : Int32?, margin_left : Int32?, margin_right : Int32?, margin_start : Int32?, margin_top : Int32?, name : String?, no_show_all : Bool?, opacity : Float64?, orientation : Gtk::Orientation?, parent : Gtk::Container?, receives_default : Bool?, resize_mode : Gtk::ResizeMode?, sensitive : Bool?, spacing : Int32?, style : Gtk::Style?, tooltip_markup : String?, tooltip_text : String?, valign : Gtk::Align?, vexpand : Bool?, vexpand_set : Bool?, visible : Bool?, width_request : Int32?) : Void
+      def initialize(
+        @child : Component,
+        app_paintable : Bool?,
+        baseline_position : Gtk::BaselinePosition?,
+        border_width : UInt32?,
+        can_default : Bool?,
+        can_focus : Bool?,
+        double_buffered : Bool?,
+        events : Gdk::EventMask?,
+        focus_on_click : Bool?,
+        halign : Gtk::Align?,
+        has_default : Bool?,
+        has_focus : Bool?,
+        has_tooltip : Bool?,
+        height_request : Int32?,
+        hexpand : Bool?,
+        hexpand_set : Bool?,
+        homogeneous : Bool?,
+        is_focus : Bool?,
+        margin : Int32?,
+        margin_bottom : Int32?,
+        margin_end : Int32?,
+        margin_left : Int32?,
+        margin_right : Int32?,
+        margin_start : Int32?,
+        margin_top : Int32?,
+        name : String?,
+        no_show_all : Bool?,
+        opacity : Float64?,
+        orientation : Gtk::Orientation?,
+        receives_default : Bool?,
+        resize_mode : Gtk::ResizeMode?,
+        sensitive : Bool?,
+        spacing : Int32?,
+        style : Gtk::Style?,
+        tooltip_markup : String?,
+        tooltip_text : String?,
+        valign : Gtk::Align?,
+        vexpand : Bool?,
+        vexpand_set : Bool?,
+        visible : Bool?,
+        width_request : Int32?,
+        padding : Int32 = 0,
+        fill : Bool = false,
+        expand : Bool = false
+      ) : Void
         @app_paintable = app_paintable
         @baseline_position = baseline_position
         @border_width = border_width
         @can_default = can_default
         @can_focus = can_focus
-        @child = child
         @double_buffered = double_buffered
         @events = events
         @expand = expand
         @focus_on_click = focus_on_click
+        @fill = fill
         @halign = halign
         @has_default = has_default
         @has_focus = has_focus
@@ -86,7 +132,7 @@ module V6
         @no_show_all = no_show_all
         @opacity = opacity
         @orientation = orientation
-        @parent = parent
+        @padding = padding
         @receives_default = receives_default
         @resize_mode = resize_mode
         @sensitive = sensitive
@@ -104,14 +150,6 @@ module V6
       def initialize(@children : Array(Component)) : Void
       end
 
-      def update : Void
-        @child.try(&.update)
-
-        @children.try(&.each do |child|
-          child.update
-        end)
-      end
-
       def render : Gtk::Widget
         box = Gtk::Box.new(
           app_paintable: @app_paintable,
@@ -119,7 +157,6 @@ module V6
           border_width: @border_width,
           can_default: @can_default,
           can_focus: @can_focus,
-          child: @child,
           double_buffered: @double_buffered,
           events: @events,
           expand: @expand,
@@ -144,7 +181,6 @@ module V6
           no_show_all: @no_show_all,
           opacity: @opacity,
           orientation: @orientation,
-          parent: @parent,
           receives_default: @receives_default,
           resize_mode: @resize_mode,
           sensitive: @sensitive,
@@ -159,13 +195,17 @@ module V6
           width_request: @width_request
         )
 
-        @child.try(box.pack_start(&.render))
+        @child.try do |child|
+          box.pack_start(child.render, expand: @expand, fill: @fill, padding: @padding)
+        end
 
-        @children.try(&.each do |child|
-          box.pack_start(child.render)
-        end)
+        @children.try do |children|
+          children.each do |child|
+            box.pack_start(child.render, expand: @expand, fill: @fill, padding: @padding)
+          end
+        end
 
-        box
+        return box
       end
     end
   end

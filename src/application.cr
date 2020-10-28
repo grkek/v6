@@ -1,10 +1,21 @@
 require "gobject/gtk"
+require "tasker"
 require "./ui/**"
 
 module V6
   # `Application` contains the bootstrapping mechanism.
-  abstract class Application < Gtk::Application
+  abstract class Application
     include Ui
+
+    property native : Gtk::Application
+
+    def initialize
+      @native = Gtk::Application.new(application_id: "com.grkek.v6")
+    end
+
+    def initialize(application_id : String)
+      @native = Gtk::Application.new(application_id: application_id)
+    end
 
     abstract def render : Component
 
@@ -21,7 +32,7 @@ module V6
     end
 
     def border_width : UInt32 | Nil
-      nil
+      30_u32
     end
 
     def can_default : Bool | Nil
@@ -278,7 +289,7 @@ module V6
 
     def window : Gtk::ApplicationWindow
       Gtk::ApplicationWindow.new(
-        application: self.as(Gtk::Application),
+        application: @native,
         accept_focus: accept_focus,
         app_paintable: app_paintable,
         attached_to: attached_to,
@@ -350,18 +361,17 @@ module V6
     end
 
     def run : Void
-      component =
-        render.try(&.render)
+      @native.on_activate do
+        component =
+          render()
 
-      window = window()
-
-      on_activate do
-        window.connect("destroy", &->quit)
-        window.add(component)
+        window = window()
+        window.connect("destroy", &->@native.quit)
+        window.add(component.try(&.render))
         window.show_all
       end
 
-      run()
+      @native.run
     end
   end
 end

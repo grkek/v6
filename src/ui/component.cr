@@ -9,7 +9,7 @@ module V6
       abstract def initialize : Void
       abstract def initialize(@child : Component) : Void
       abstract def initialize(@children : Array(Component)) : Void
-      abstract def update : Void
+
       abstract def render : Gtk::Widget
     end
   end

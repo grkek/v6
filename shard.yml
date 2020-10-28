@@ -9,6 +9,9 @@ dependencies:
     github: jhass/crystal-gobject
     sversion: ~> 0.9.1
 
+  tasker:
+    github: spider-gazelle/tasker
+
 crystal: 0.35.1
 
 license: MIT
