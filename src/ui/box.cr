@@ -58,46 +58,46 @@ module V6
 
       def initialize(
         @child : Component,
-        app_paintable : Bool?,
-        baseline_position : Gtk::BaselinePosition?,
-        border_width : UInt32?,
-        can_default : Bool?,
-        can_focus : Bool?,
-        double_buffered : Bool?,
-        events : Gdk::EventMask?,
-        focus_on_click : Bool?,
-        halign : Gtk::Align?,
-        has_default : Bool?,
-        has_focus : Bool?,
-        has_tooltip : Bool?,
-        height_request : Int32?,
-        hexpand : Bool?,
-        hexpand_set : Bool?,
-        homogeneous : Bool?,
-        is_focus : Bool?,
-        margin : Int32?,
-        margin_bottom : Int32?,
-        margin_end : Int32?,
-        margin_left : Int32?,
-        margin_right : Int32?,
-        margin_start : Int32?,
-        margin_top : Int32?,
-        name : String?,
-        no_show_all : Bool?,
-        opacity : Float64?,
-        orientation : Gtk::Orientation?,
-        receives_default : Bool?,
-        resize_mode : Gtk::ResizeMode?,
-        sensitive : Bool?,
-        spacing : Int32?,
-        style : Gtk::Style?,
-        tooltip_markup : String?,
-        tooltip_text : String?,
-        valign : Gtk::Align?,
-        vexpand : Bool?,
-        vexpand_set : Bool?,
-        visible : Bool?,
-        width_request : Int32?,
+        app_paintable : Bool? = nil,
+        baseline_position : Gtk::BaselinePosition? = nil,
+        border_width : UInt32? = nil,
+        can_default : Bool? = nil,
+        can_focus : Bool? = nil,
+        double_buffered : Bool? = nil,
+        events : Gdk::EventMask? = nil,
+        focus_on_click : Bool? = nil,
+        halign : Gtk::Align? = nil,
+        has_default : Bool? = nil,
+        has_focus : Bool? = nil,
+        has_tooltip : Bool? = nil,
+        height_request : Int32? = nil,
+        hexpand : Bool? = nil,
+        hexpand_set : Bool? = nil,
+        homogeneous : Bool? = nil,
+        is_focus : Bool? = nil,
+        margin : Int32? = nil,
+        margin_bottom : Int32? = nil,
+        margin_end : Int32? = nil,
+        margin_left : Int32? = nil,
+        margin_right : Int32? = nil,
+        margin_start : Int32? = nil,
+        margin_top : Int32? = nil,
+        name : String? = nil,
+        no_show_all : Bool? = nil,
+        opacity : Float64? = nil,
+        orientation : Gtk::Orientation? = nil,
+        receives_default : Bool? = nil,
+        resize_mode : Gtk::ResizeMode? = nil,
+        sensitive : Bool? = nil,
+        spacing : Int32? = nil,
+        style : Gtk::Style? = nil,
+        tooltip_markup : String? = nil,
+        tooltip_text : String? = nil,
+        valign : Gtk::Align? = nil,
+        vexpand : Bool? = nil,
+        vexpand_set : Bool? = nil,
+        visible : Bool? = nil,
+        width_request : Int32? = nil,
         padding : Int32 = 0,
         fill : Bool = false,
         expand : Bool = false
@@ -148,6 +148,97 @@ module V6
       end
 
       def initialize(@children : Array(Component)) : Void
+      end
+
+      def initialize(
+        @children : Array(Component),
+        app_paintable : Bool? = nil,
+        baseline_position : Gtk::BaselinePosition? = nil,
+        border_width : UInt32? = nil,
+        can_default : Bool? = nil,
+        can_focus : Bool? = nil,
+        double_buffered : Bool? = nil,
+        events : Gdk::EventMask? = nil,
+        focus_on_click : Bool? = nil,
+        halign : Gtk::Align? = nil,
+        has_default : Bool? = nil,
+        has_focus : Bool? = nil,
+        has_tooltip : Bool? = nil,
+        height_request : Int32? = nil,
+        hexpand : Bool? = nil,
+        hexpand_set : Bool? = nil,
+        homogeneous : Bool? = nil,
+        is_focus : Bool? = nil,
+        margin : Int32? = nil,
+        margin_bottom : Int32? = nil,
+        margin_end : Int32? = nil,
+        margin_left : Int32? = nil,
+        margin_right : Int32? = nil,
+        margin_start : Int32? = nil,
+        margin_top : Int32? = nil,
+        name : String? = nil,
+        no_show_all : Bool? = nil,
+        opacity : Float64? = nil,
+        orientation : Gtk::Orientation? = nil,
+        receives_default : Bool? = nil,
+        resize_mode : Gtk::ResizeMode? = nil,
+        sensitive : Bool? = nil,
+        spacing : Int32? = nil,
+        style : Gtk::Style? = nil,
+        tooltip_markup : String? = nil,
+        tooltip_text : String? = nil,
+        valign : Gtk::Align? = nil,
+        vexpand : Bool? = nil,
+        vexpand_set : Bool? = nil,
+        visible : Bool? = nil,
+        width_request : Int32? = nil,
+        padding : Int32 = 0,
+        fill : Bool = false,
+        expand : Bool = false
+      ) : Void
+        @app_paintable = app_paintable
+        @baseline_position = baseline_position
+        @border_width = border_width
+        @can_default = can_default
+        @can_focus = can_focus
+        @double_buffered = double_buffered
+        @events = events
+        @expand = expand
+        @focus_on_click = focus_on_click
+        @fill = fill
+        @halign = halign
+        @has_default = has_default
+        @has_focus = has_focus
+        @has_tooltip = has_tooltip
+        @height_request = height_request
+        @hexpand = hexpand
+        @hexpand_set = hexpand_set
+        @homogeneous = homogeneous
+        @is_focus = is_focus
+        @margin = margin
+        @margin_bottom = margin_bottom
+        @margin_end = margin_end
+        @margin_left = margin_left
+        @margin_right = margin_right
+        @margin_start = margin_start
+        @margin_top = margin_top
+        @name = name
+        @no_show_all = no_show_all
+        @opacity = opacity
+        @orientation = orientation
+        @padding = padding
+        @receives_default = receives_default
+        @resize_mode = resize_mode
+        @sensitive = sensitive
+        @spacing = spacing
+        @style = style
+        @tooltip_markup = tooltip_markup
+        @tooltip_text = tooltip_text
+        @valign = valign
+        @vexpand = vexpand
+        @vexpand_set = vexpand_set
+        @visible = visible
+        @width_request = width_request
       end
 
       def render : Gtk::Widget

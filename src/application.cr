@@ -32,7 +32,7 @@ module V6
     end
 
     def border_width : UInt32 | Nil
-      30_u32
+      10_u32
     end
 
     def can_default : Bool | Nil

@@ -10,14 +10,13 @@ class Application < V6::Application
         child: Box.new(
           child: Box.new(
             children: [
-              Custom.new,
-              Custom.new,
-              Custom.new,
-              Custom.new,
-              Custom.new,
-              Custom.new,
-            ] of Component
-          )
+              Label.new(text: "Hello, World!"),
+            ] of Component,
+            orientation: Gtk::Orientation::HORIZONTAL,
+            padding: 20,
+            fill: true
+          ),
+          padding: 50
         )
       )
     )
