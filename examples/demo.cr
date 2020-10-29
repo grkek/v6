@@ -6,11 +6,11 @@ class Application < V6::Application
   end
 
   def width : Int32
-    600
+    0
   end
 
   def height : Int32
-    400
+    0
   end
 
   def render : Component
@@ -23,7 +23,9 @@ class Application < V6::Application
                 .new(
                   children: [
                     Label.new(str: "Hello, World!"),
-                    Image.new(file: ""),
+                    Image.new(
+                      file: "#{__DIR__}/images/example.png"
+                    ),
                   ] of Component,
                 )
             )
