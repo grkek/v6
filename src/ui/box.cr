@@ -3,9 +3,6 @@ require "./component"
 module V6
   module Ui
     class Box < Component
-      property child : Component?
-      property children : Array(Component)?
-
       getter widget : Gtk::Widget?
 
       delegate app_paintable, to: @widget.not_nil!
