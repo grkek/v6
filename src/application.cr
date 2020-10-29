@@ -7,14 +7,14 @@ module V6
   abstract class Application
     include Ui
 
-    property native : Gtk::Application
+    property widget : Gtk::Application
 
     def initialize
-      @native = Gtk::Application.new(application_id: "com.grkek.v6")
+      @widget = Gtk::Application.new(application_id: "com.grkek.v6")
     end
 
     def initialize(application_id : String)
-      @native = Gtk::Application.new(application_id: application_id)
+      @widget = Gtk::Application.new(application_id: application_id)
     end
 
     abstract def render : Component
@@ -47,11 +47,11 @@ module V6
       nil
     end
 
-    def default_height : Int32
+    def height : Int32
       600
     end
 
-    def default_width : Int32
+    def width : Int32
       800
     end
 
@@ -289,7 +289,7 @@ module V6
 
     def window : Gtk::ApplicationWindow
       Gtk::ApplicationWindow.new(
-        application: @native,
+        application: @widget,
         accept_focus: accept_focus,
         app_paintable: app_paintable,
         attached_to: attached_to,
@@ -297,8 +297,8 @@ module V6
         can_default: can_default,
         can_focus: can_focus,
         decorated: decorated,
-        default_height: default_height,
-        default_width: default_width,
+        default_height: height,
+        default_width: width,
         deletable: deletable,
         destroy_with_parent: destroy_with_parent,
         double_buffered: double_buffered,
@@ -361,17 +361,17 @@ module V6
     end
 
     def run : Void
-      @native.on_activate do
+      @widget.on_activate do
         component =
           render()
 
         window = window()
-        window.connect("destroy", &->@native.quit)
+        window.connect("destroy", &->@widget.quit)
         window.add(component.try(&.render))
         window.show_all
       end
 
-      @native.run
+      @widget.run
     end
   end
 end

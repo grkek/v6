@@ -12,6 +12,10 @@ dependencies:
   tasker:
     github: spider-gazelle/tasker
 
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+
 crystal: 0.35.1
 
 license: MIT
